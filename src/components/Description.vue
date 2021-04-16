@@ -11,4 +11,18 @@
 
 <style scoped>
     
+    @media (min-width: 380px) {
+        div{
+            font-size: 120%;
+        }
+        #descSmol{
+            display: none;
+        }
+    }
+
+    @media (max-width: 379px) {
+        #descBig{
+            display: none;
+        }
+    }
 </style>

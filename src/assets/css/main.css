@@ -45,7 +45,6 @@ body{
     flex-direction: column;
     justify-content: space-between
 }
-/*here end all things */
 
 h1{
     font-family: News;
@@ -55,22 +54,13 @@ p{
     font-family: BCN;
 }
 
-#titleZone{
-    display: flex;
-    justify-content: center;
-    
-    
-}
+/*here end all things */
 
 
 
-.walter{
-    max-width: 10%;
-    min-width: 50px;
-    max-height: 90px;
-    min-height: 50px;
-    align-self: center;
-}
+
+
+
 
 #messageArea{
     visibility: collapse;
