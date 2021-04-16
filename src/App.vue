@@ -1,9 +1,9 @@
 <template>
-<div>
+<div id="mainDiv">
   <div id="titleZone">
-      <img class="walter" src="src/assets/img/smWalrus.webp" alt="Premier Walrus" >
+      <img class="walter" src="./assets/img/smWalrus.webp" alt="Premier Walrus" >
       <header>The Walrus Project</header>
-      <img class="walter" src="src/assets/img/smWalrus2.webp" alt="Second walrus" >
+      <img class="walter" id="wally" src="./assets/img/smWalrus.webp" alt="Second walrus" >
   </div>
   <body>
       <description/>
@@ -22,15 +22,23 @@ import Description from './components/Description.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ChatHistory,
+    Description
   }
 }
 </script>
 
 <style>
+  #mainDiv{
+    height: 100%;
+  }
   #titleZone{
     display: flex;
     justify-content: center;
+  }
+
+  #wally{
+    transform: scaleX(-1);
   }
 
   .walter{

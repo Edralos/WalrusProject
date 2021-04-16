@@ -13,13 +13,18 @@
     src: url(../fonts/Eighty-Eight.otf);
 }
 
+#app{
+    height: 100%;
+}
+html{
+    height: 100%;
+}
 header{
     font-size: 40px;
     font-family: EightyEight;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background-color: white;
     text-align:center;
 }
 
@@ -34,6 +39,10 @@ footer{
     
 }
 
+html{
+    background: #282a31;
+    color: #c6f8ff;
+}
 
 html, body{
     height: 100%;
@@ -56,63 +65,3 @@ p{
 
 /*here end all things */
 
-
-
-
-
-
-
-#messageArea{
-    visibility: collapse;
-    height: 0px;
-}
-
-
-#tapZone{
-    height: 900px;
-    border-style: dashed;
-    visibility: visible;
-}
-
-
-
-
-#receivedMessage{
-    visibility: collapse;
-    height: 0px;
-}
-
-@media (min-width: 380px){
-    
-    #messageArea{
-        display: flex;
-        visibility: visible;
-        height: 20%
-    }
-
-    
-    button{
-        visibility: visible;
-        
-        width: 20%;
-        
-    }
-    
-    
-    #clearMessage{
-        visibility: visible;
-        resize: unset;
-        width: 80%;
-        
-    }
-    
-    #tapZone{
-        visibility: collapse;
-        height: 0px;
-        border-style: unset;
-    }
-    #receivedMessage{
-        visibility: visible;
-        min-height: 20%;
-    }
-}
