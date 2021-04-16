@@ -1,0 +1,128 @@
+@font-face {
+    font-family: News;
+    src: url(../fonts/NewspaperCutoutWhiteOnBlac-Rg.ttf);
+}
+
+@font-face{
+    font-family: BCN;
+    src: url(../fonts/BCN\ Nightmare\ Club.otf);
+}
+
+@font-face {
+    font-family: EightyEight;
+    src: url(../fonts/Eighty-Eight.otf);
+}
+
+header{
+    font-size: 40px;
+    font-family: EightyEight;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: white;
+    text-align:center;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-family: BCN;
+    font-size: 10px;
+    text-align: center;
+    
+    
+}
+
+
+html, body{
+    height: 100%;
+}
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+/*here end all things */
+
+h1{
+    font-family: News;
+}
+
+p{
+    font-family: BCN;
+}
+
+#titleZone{
+    display: flex;
+    justify-content: center;
+    
+    
+}
+
+
+
+.walter{
+    max-width: 10%;
+    min-width: 50px;
+    max-height: 90px;
+    min-height: 50px;
+    align-self: center;
+}
+
+#messageArea{
+    visibility: collapse;
+    height: 0px;
+}
+
+
+#tapZone{
+    height: 900px;
+    border-style: dashed;
+    visibility: visible;
+}
+
+
+
+
+#receivedMessage{
+    visibility: collapse;
+    height: 0px;
+}
+
+@media (min-width: 380px){
+    
+    #messageArea{
+        display: flex;
+        visibility: visible;
+        height: 20%
+    }
+
+    
+    button{
+        visibility: visible;
+        
+        width: 20%;
+        
+    }
+    
+    
+    #clearMessage{
+        visibility: visible;
+        resize: unset;
+        width: 80%;
+        
+    }
+    
+    #tapZone{
+        visibility: collapse;
+        height: 0px;
+        border-style: unset;
+    }
+    #receivedMessage{
+        visibility: visible;
+        min-height: 20%;
+    }
+}
