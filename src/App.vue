@@ -5,9 +5,12 @@
       <header>The Walrus Project</header>
       <img class="walter" id="wally" src="./assets/img/smWalrus.webp" alt="Second walrus" >
   </div>
+    <p>Your id : {{idUser}}</p>
+    <input type="text" id="friendIdField" placeholder="Write Target ID here" v-model="friendId"/>
   <body>
-      <description/>
-      <chat-history/>
+    <description/>
+    <chat-history/>
+    <desktop-message-area :alphabet="alphabet" :friendId="friendId" :socket="socket"/>
 
   </body>
   <footer>A project by Ulysse HAVE & Thibaud MORNET BLANCHET</footer>
@@ -18,12 +21,71 @@
 <script>
 import ChatHistory from './components/ChatHistory.vue'
 import Description from './components/Description.vue'
+import morse from './assets/json/morse.json'
+import reverseWalrus from './assets/json/reverseWalrus.json'
+import DesktopMessageArea from './components/DesktopMessageArea.vue'
 
 export default {
   name: 'App',
   components: {
     ChatHistory,
-    Description
+    Description,
+    DesktopMessageArea
+  },
+  data(){
+    return {
+      idUser: '',
+      friendId: '',
+      socket:'',
+      alphabet : morse,
+      reverseAlph : reverseWalrus
+      };
+  },
+  created(){
+    console.log(this.reverseAlph)
+    let vm = this;
+    console.log('coucou: ' + window.location.href);
+    let io = require("socket.io-client");
+
+    this.socket = io.connect(window.location.href.replace('8080','5000'), {
+      reconnectionDelayMax: 10000,
+      
+    });
+
+    this.socket.on('connect', function() {
+      console.log('Connected to server');
+      vm.socket.emit('message', 'CA MARCHE');
+    });
+
+    this.socket.on('idResponse',function(id){
+      vm.idUser = id;
+      console.log('id attribué ' + id)
+    });
+
+    this.socket.on('messageMorse', function(morse){
+        
+        let arr =[];
+        for (let index = 0; index < morse.length; index++) {
+            switch (morse[index]) {
+              case '.':
+                arr.push(150);
+                arr.push(40);
+                break;
+              case '-':
+                arr.push(300);
+                arr.push(40);
+                break;
+              case ' ':
+                arr.push(1);
+                arr.push(600);
+                
+                break;
+              default:
+                break;
+            }
+        }
+        window.navigator.vibrate(arr);
+    });
   }
 }
 </script>
@@ -47,6 +109,15 @@ export default {
     max-height: 90px;
     min-height: 50px;
     align-self: center;
+  }
+
+  #friendIdField{
+    width: 90%;
+    color: #c6f8ff;
+    background-color: #282a31;
+    border-color: #c6f8ff;
+    height: 20px;
+    resize: unset;
   }
 
   @media (min-width: 380px) {
