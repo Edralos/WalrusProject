@@ -8,8 +8,8 @@
 <script>
 export default{
     name: 'DesktopMessageArea',
-    data:{
-        toSend: '',
+    data(){
+        return{toSend: ''}
     },
     props:{
         friendId: String,
