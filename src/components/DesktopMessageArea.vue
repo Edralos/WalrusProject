@@ -35,9 +35,25 @@ export default{
 </script>
 
 <style scoped>
-    #typeZone{
-        width: 90%;
-        height: 30%;
+    input{
+        width: 100%;
+        height: 100%;
         resize: vertical;
+    }
+    div{
+        display: flex;
+        justify-content: center;
+        height: 70px;
+    }
+
+    button{
+        height: 100%;
+    }
+
+    
+    @media (max-width: 379px) {
+        div{
+            display: none;
+        }
     }
 </style>

@@ -9,9 +9,9 @@
     <input type="text" id="friendIdField" placeholder="Write Target ID here" v-model="friendId"/>
   <body>
     <description/>
-    <chat-history/>
+    <chat-history :lastMessage="lastMessage"/>
     <desktop-message-area :alphabet="alphabet" :friendId="friendId" :socket="socket"/>
-
+    <phone-message-area :friendId="friendId" :socket="socket"/>
   </body>
   <footer>A project by Ulysse HAVE & Thibaud MORNET BLANCHET</footer>
 </div>
@@ -24,13 +24,15 @@ import Description from './components/Description.vue'
 import morse from './assets/json/morse.json'
 import reverseWalrus from './assets/json/reverseWalrus.json'
 import DesktopMessageArea from './components/DesktopMessageArea.vue'
+import PhoneMessageArea from './components/PhoneMessageArea.vue'
 
 export default {
   name: 'App',
   components: {
     ChatHistory,
     Description,
-    DesktopMessageArea
+    DesktopMessageArea,
+    PhoneMessageArea
   },
   data(){
     return {
@@ -38,7 +40,8 @@ export default {
       friendId: '',
       socket:'',
       alphabet : morse,
-      reverseAlph : reverseWalrus
+      reverseAlph : reverseWalrus,
+      lastMessage: 'Here will appear your last received message'
       };
   },
   created(){
@@ -65,6 +68,13 @@ export default {
     this.socket.on('messageMorse', function(morse){
         
         let arr =[];
+        let strW = morse.split(' ');
+        let strH = "";
+        strW.forEach(letter => {
+          strH+=this.reverseAlph[letter];
+        });
+
+        this.lastReceived = strH.toUpperCase();
         for (let index = 0; index < morse.length; index++) {
             switch (morse[index]) {
               case '.':
@@ -120,9 +130,12 @@ export default {
     resize: unset;
   }
 
+
   @media (min-width: 380px) {
     header{
       font-size: 120%;
     }
+  
+
   }
 </style>
