@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>Received message :</p>
         <p>{{lastMessage}}</p>
     </div>
 </template>
@@ -23,5 +24,7 @@ export default Vue.extend({
 
 
 <style scoped>
-
+div{
+    text-align: center;
+}
 </style>

@@ -11,7 +11,7 @@
     <description/>
     <chat-history :lastMessage="lastMessage"/>
     <desktop-message-area :alphabet="alphabet" :friendId="friendId" :socket="socket"/>
-    <phone-message-area :friendId="friendId" :socket="socket"/>
+    <phone-message-area :friendId="friendId" :socket="socket" :reverse="reverseAlph"/>
   </body>
   <footer>A project by Ulysse HAVE & Thibaud MORNET BLANCHET</footer>
 </div>
@@ -67,14 +67,18 @@ export default {
 
     this.socket.on('messageMorse', function(morse){
         
+        console.log("received smtg : " + morse);
         let arr =[];
         let strW = morse.split(' ');
+        console.log("strW :" + strW);
         let strH = "";
         strW.forEach(letter => {
-          strH+=this.reverseAlph[letter];
+          if(letter != '')
+          {strH += vm.reverseAlph[letter];}
         });
+        console.log(strH);
+        vm.lastMessage = strH.toString().toUpperCase();
 
-        this.lastReceived = strH.toUpperCase();
         for (let index = 0; index < morse.length; index++) {
             switch (morse[index]) {
               case '.':
@@ -128,10 +132,11 @@ export default {
     border-color: #c6f8ff;
     height: 20px;
     resize: unset;
+    max-width: 300px;
   }
 
 
-  @media (min-width: 380px) {
+  @media (min-width: 415px) {
     header{
       font-size: 120%;
     }

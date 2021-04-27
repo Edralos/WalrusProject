@@ -1,7 +1,8 @@
 <template>
 <div>
     <input name="typeZone" id="typezone" v-model="toSend">
-    <button v-on:click="sendText" type="input">Send</button>
+    <button v-on:click="sendText" type="input"><img src="../assets/img/sendMsg.webp" alt="Send">
+        </button>
 </div>
 </template>
 
@@ -37,6 +38,7 @@ export default{
 <style scoped>
     input{
         width: 100%;
+        max-width: 1000px;
         height: 100%;
         resize: vertical;
     }
@@ -48,10 +50,13 @@ export default{
 
     button{
         height: 100%;
+        background: transparent;
+        border-color: transparent;
+        
     }
 
     
-    @media (max-width: 379px) {
+    @media (max-width: 414px) {
         div{
             display: none;
         }

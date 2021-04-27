@@ -8,6 +8,7 @@ export default Vue.extend({
   props: {
     friendId: String,
     socket: Object,
+    reverse: Object
   },
   data() {
     return {
@@ -19,57 +20,98 @@ export default Vue.extend({
       message: "",
     };
   },
-  created() {
-    let taptap = document.getElementById("tapZone");
-    taptap.addEventListener("touchstart", touchStartHandler, false);
-    taptap.addEventListener("touchend", touchEndHandler, false);
-
-    function touchStartHandler(ev) {
+  methods: {
+    touchStartHandler(ev) {
       ev.preventDefault();
+      console.log("tapstart");
       let touches = ev.changedTouches;
       this.ongoingTouch = touches[0];
       this.datestart = Date.now();
-      if (this.datestart - this.dateend > 600) {
-        this.message += this.letter + " ";
+      if (this.datestart - this.dateend > 400) {
+        console.log("space");
+        console.log("letter : " + this.letter);
+        if(this.reverse[this.letter] != undefined){
+          
+          this.message += this.letter + " ";
+        }
+          
+        
+
+        
         this.letter = "";
       }
-    }
-
-    function touchEndHandler(ev) {
+      
+    },
+    touchEndHandler(ev) {
       ev.preventDefault()
+      console.log("tapend");
       let touches = ev.changedTouches
-      if(this.ongoingTouch != touches[0]){
+      
+      if(this.ongoingTouch.identifier != touches[0].identifier){
           return
       }
       let end = Date.now();
       let elapsed = end - this.datestart;
-      if (elapsed < 30) {
+      console.log("end elapsed : " + elapsed);
+      
+      if (elapsed < 100) {
+        console.log(".");
         this.letter += ".";
       }
-      if (elapsed > 1000) {
+      else if (elapsed > 1000) {
+        console.log("sending");
         this.message += this.letter + " ";
         this.letter = "";
-        this.socket.emit("messageMorse", this.message);
+        try {
+          let packet = {
+            id: this.friendId,
+            morse: this.message
+          }
+          this.socket.emit("messageMorse", packet);
+          console.log("message : " + packet.morse + " to : " + packet.id);
+          
+        } catch (error) {
+          console.log(error);
+          
+        }
         this.message = "";
       } else {
+        console.log("-");
         this.letter += "-";
       }
       this.dateend = Date.now();
       return;
     }
+
+
+  },
+  mounted() {
+    let taptap = document.getElementById("tapZone");
+    if(taptap == null)
+    {
+      console.log("taptap absent");
+      
+      return
+    }
+    console.log("taptap présent");
+    
+    taptap.addEventListener("touchstart", this.touchStartHandler, false);
+    taptap.addEventListener("touchend", this.touchEndHandler, false);
+
+    
   },
 });
 </script>
 
 
 <style scoped>
-div {
+#tapZone {
   height: 90px;
   border-style: dashed;
   border-color: #c6f8ff;
 }
-@media (min-size: 380px) {
-  div {
+@media (min-width: 415px) {
+  #tapZone {
     display: none;
   }
 }

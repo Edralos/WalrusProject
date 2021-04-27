@@ -16,7 +16,7 @@
     h1{
             font-size: 150%;
         }
-    @media (min-width: 380px) {
+    @media (min-width: 415px) {
         
 
         div{
@@ -28,7 +28,7 @@
         }
     }
 
-    @media (max-width: 379px) {
+    @media (max-width: 414px) {
         #descBig{
             display: none;
         }
