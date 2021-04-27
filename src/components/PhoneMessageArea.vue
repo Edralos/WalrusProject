@@ -1,5 +1,7 @@
 <template>
-  <div id="tapZone"></div>
+  <div id="tapZone">
+    <p>Tap some morse code here !!</p>
+  </div>
 </template>
 
 <script lang="ts">
@@ -31,7 +33,7 @@ export default Vue.extend({
         console.log("space");
         console.log("letter : " + this.letter);
         if(this.reverse[this.letter] != undefined){
-          
+
           this.message += this.letter + " ";
         }
           
@@ -106,9 +108,18 @@ export default Vue.extend({
 
 <style scoped>
 #tapZone {
-  height: 90px;
+  min-height: 90px;
+  height: 100%;
   border-style: dashed;
   border-color: #c6f8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p{
+  text-align: center;
+  font-size: 200%;
 }
 @media (min-width: 415px) {
   #tapZone {

@@ -66,7 +66,6 @@ export default {
     });
 
     this.socket.on('messageMorse', function(morse){
-        
         console.log("received smtg : " + morse);
         let arr =[];
         let strW = morse.split(' ');
@@ -98,7 +97,7 @@ export default {
                 break;
             }
         }
-        window.navigator.vibrate(arr);
+       window.navigator.vibrate(arr);
     });
   }
 }
